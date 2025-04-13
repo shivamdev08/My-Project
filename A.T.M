@@ -1,9 +1,9 @@
 import time
 
 def english_menu( ):
-    corent_money = 0    #by default value
+    corent_money = float(0.00)    #by default value
     while True:
-        print("""Plase select the right option :
+        print("""\nPlase select the right option :
         Deposit         : 1 (Press 1 for "Deposit".)
         Withdrawal      : 2 (Press 2 for "Withdrawal money".)
         Exit            : 3 (Press 3 for "Exit".)\n""")
@@ -11,23 +11,28 @@ def english_menu( ):
         option = int(input("Your select option : "))
 
         if option == 1:
-            print("Please enter the deposit amount.""\n")
-            deposit_money = int(input("₹          "))
-            corent_money = deposit_money
-            t = 5
-            while (t > 0):
-                second = 5
-                count = "{:02d}".format(second)
-                print("TRANSACTION IN PROGRESS. PLEASE WAIT", end="\r")
-                time.sleep(1)
-                t -= 1
-            print("Transaction is successful.")
-            print(f"Your balence is {corent_money}")
+            print("Please enter the deposit amount with a minimum of 100.""\n")
+            deposit_money = float(input("₹          "))
+            if (deposit_money >= 100):
+                corent_money = deposit_money
+                t = 5
+                while (t > 0):
+                    second = 5
+                    count = "{:02d}".format(second)
+                    print("TRANSACTION IN PROGRESS. PLEASE WAIT", end="\r")
+                    time.sleep(1)
+                    t -= 1
+                print("Transaction is successful.")
+                print(f"Your balence is {corent_money:.3f}")
+                
+            else :
+                print("The deposit amount should be a minimum of 100. Please try again.")
+                continue
 
         elif option == 2:
             print("Please enter the withdrawal amount.""\n")
-            withdrawal_money = int(input("₹          "))
-            if (withdrawal_money <= corent_money):
+            withdrawal_money = float(input("₹          "))
+            if (withdrawal_money >= 100) and (withdrawal_money <= corent_money):
                 corent_money -= withdrawal_money
                 t = 5
                 while (t > 0):
@@ -37,7 +42,7 @@ def english_menu( ):
                     time.sleep(1)
                     t -= 1
                 print("Transaction is successful.""\n")
-                print(f"Your balence is {corent_money}")
+                print(f"Your balence is {corent_money:.3f}")
             
             else :
                 print("""You don'n have that much money.
@@ -64,9 +69,9 @@ def english_menu( ):
                     exit ( )
 
 def hindi_menu( ):
-    corent_money = 0    #by default value
+    corent_money = float(0)    #by default value
     while True:
-        print("""कृपया सही विकल्प चुनें :
+        print("""\nकृपया सही विकल्प चुनें :
         जमा             : 1 (दबाएं 1 "जमा" के लिए)
         निकासी          : 2 (दबाएं 2 "निकासी" के लिए)
         बाहर जाएं       : 3 (दबाएं 3 "बाहर जाने के लिए"))\n""")
@@ -75,21 +80,26 @@ def hindi_menu( ):
 
         if option == 1:
             print("कृपया जमा राशि डालें।""\n")
-            deposit_money = int(input("₹          "))
-            corent_money = deposit_money
-            t = 5
-            while (t > 0):
-                second = 5
-                count = "{:02d}".format(second)
-                print("लेन-देन प्रक्रिया हो रही है। कृपया इंतजार करें।", end="\r")
-                time.sleep(1)
-                t -= 1
-            print("लेन-देन सफल रहा।")
-            print(f"आपका बैलेंस है {corent_money}")
+            deposit_money = float(input("₹          "))
+            if (deposit_money >= 100):
+                corent_money = deposit_money
+                t = 5
+                while (t > 0):
+                    second = 5
+                    count = "{:02d}".format(second)
+                    print("लेन-देन प्रक्रिया हो रही है। कृपया इंतजार करें।", end="\r")
+                    time.sleep(1)
+                    t -= 1
+                print("लेन-देन सफल रहा।")
+                print(f"आपका बैलेंस है {corent_money:.3f}")
+                
+            else :
+                print("जमा राशि कम से कम 100 होनी चाहिए। कृपया पुनः प्रयास करें।")
+                continue
 
         elif option == 2:
             print("कृपया निकासी राशि डालें।""\n")
-            withdrawal_money = int(input("₹          "))
+            withdrawal_money = float(input("₹          "))
             if (withdrawal_money <= corent_money):
                 corent_money -= withdrawal_money
                 t = 5
@@ -100,7 +110,7 @@ def hindi_menu( ):
                     time.sleep(1)
                     t -= 1
                 print("लेन-देन सफल रहा।""\n")
-                print(f"आपका बैलेंस है {corent_money}")
+                print(f"आपका बैलेंस है {corent_money:.3f}")
             
             else :
                 print("""आपके पास उतना पैसा नहीं है।
@@ -145,6 +155,7 @@ def select_language(language):
 
                 match (retry_language):
                     case 1:
+                        english_language( )
                         return True
 
                     case 2:
@@ -162,9 +173,30 @@ def english_language( ):
         case 1 :
             print("Please enter PIN""\n")
             pin = int(input("Enter PIN : "))
+            print("Plase enter valide PIN""\n")
             while True:
-                    print("Plase enter valide PIN")
-                    pin = int(input("Enter PIN :"))
+                print("""Please enter valide option :
+                MAIN MENU               : 1 (Press 1 to go to Main Menu)")
+                ENETER PIN              : 2 (Press 2 for "Enter PIN".)
+                EXIT                    : 3 (Press 3 for "Enter PIN".)""")
+                pin = int(input("Your select option : "))
+                
+                if pin == 1:
+                    english_menu( )
+                
+                elif pin == 2:
+                    print("Please enter PIN""\n")
+                    pin = int(input("Enter PIN : "))
+                    print("Plase enter valide PIN.")
+                    
+                elif pin == 3:
+                    print("Thank you for using my A.T.M ")
+                    exit ( )
+                    
+                else :
+                    print("\n""Please press valide option""\n")
+                    continue
+                    
 
         case 2 :
             print("Please enter new PIN""\n")
@@ -233,8 +265,27 @@ def hindi_language( ):
             print("कृपया पिन दर्ज करें\n")
             pin = int(input("पिन दर्ज करें : "))
             while True:
-                print("कृपया वैध पिन दर्ज करें")
-                pin = int(input("पिन दर्ज करें : "))
+                print("""कृपया वैध विकल्प दर्ज करें :
+                मुख्य मेनू                : 1 (मुख्य मेनू पर जाने के लिए 1 दबाएं)
+                पिन दर्ज करें             : 2 ("पिन दर्ज करें" के लिए 2 दबाएं)
+                बाहर निकलें               : 3 ("पिन दर्ज करें" के लिए 3 दबाएं)""")
+                pin = int(input("आपका चयनित विकल्प : "))
+                
+                if pin == 1:
+                    hindi_menu( )
+                
+                elif pin == 2:
+                    print("कृपया पिन दर्ज करें""\n")
+                    pin = int(input("पिन दर्ज करें : "))
+                    print("कृपया वैध पिन दर्ज करें")
+                    
+                elif pin == 3:
+                    print("मेरे ए.टी.एम. का उपयोग करने के लिए धन्यवाद। ")
+                    exit ( )
+                    
+                else :
+                    print("\n""कृपया वैध विकल्प दबाएं""\n")
+                    continue
 
         case 2 :
             print("कृपया नया पिन दर्ज करें\n")
